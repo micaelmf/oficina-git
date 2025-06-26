@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Bloqueia commit contendo 'console.log' em arquivos JS
+# ou a palavra 'BUG' em qualquer arquivo de texto.
+
+# 1) Arquivos JS: procura console.log
+if git diff --cached --name-only | grep -E '\.js$' >/dev/null; then
+  if git diff --cached | grep -q 'console\.log'; then
+    echo "❌ Commit bloqueado: remova console.log antes de commitar."
+    exit 1
+  fi
+fi
+
+# 2) Em qualquer arquivo: procura palavra BUG em maiúsculo
+if git diff --cached | grep -q 'BUG'; then
+  echo "❌ Commit bloqueado: a palavra 'BUG' detectada."
+  exit 1
+fi
+
+exit 0
