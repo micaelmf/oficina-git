@@ -315,6 +315,7 @@ git rebase -i --autosquash <hash-do-commit>^
 Se o repositório já foi enviado para o remoto, será necessário forçar o push:
 ```bash
 git push --force
+```
 
 
 
